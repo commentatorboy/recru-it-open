@@ -1,0 +1,9 @@
+C:\git\recru_it\Recru_it\Recru_it.Models\bin\Debug\netcoreapp2.0\Recru_it.Models.deps.json
+C:\git\recru_it\Recru_it\Recru_it.Models\bin\Debug\netcoreapp2.0\Recru_it.Models.dll
+C:\git\recru_it\Recru_it\Recru_it.Models\bin\Debug\netcoreapp2.0\Recru_it.Models.pdb
+C:\git\recru_it\Recru_it\Recru_it.Models\obj\Debug\netcoreapp2.0\Recru_it.Models.csprojResolveAssemblyReference.cache
+C:\git\recru_it\Recru_it\Recru_it.Models\obj\Debug\netcoreapp2.0\Recru_it.Models.csproj.CoreCompileInputs.cache
+C:\git\recru_it\Recru_it\Recru_it.Models\obj\Debug\netcoreapp2.0\Recru_it.Models.AssemblyInfoInputs.cache
+C:\git\recru_it\Recru_it\Recru_it.Models\obj\Debug\netcoreapp2.0\Recru_it.Models.AssemblyInfo.cs
+C:\git\recru_it\Recru_it\Recru_it.Models\obj\Debug\netcoreapp2.0\Recru_it.Models.dll
+C:\git\recru_it\Recru_it\Recru_it.Models\obj\Debug\netcoreapp2.0\Recru_it.Models.pdb
