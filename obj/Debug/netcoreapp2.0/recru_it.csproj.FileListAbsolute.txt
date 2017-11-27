@@ -1,0 +1,12 @@
+/Users/howie/git/recru_it/bin/Debug/netcoreapp2.0/app.db
+/Users/howie/git/recru_it/bin/Debug/netcoreapp2.0/recru_it.deps.json
+/Users/howie/git/recru_it/bin/Debug/netcoreapp2.0/recru_it.runtimeconfig.json
+/Users/howie/git/recru_it/bin/Debug/netcoreapp2.0/recru_it.runtimeconfig.dev.json
+/Users/howie/git/recru_it/bin/Debug/netcoreapp2.0/recru_it.dll
+/Users/howie/git/recru_it/bin/Debug/netcoreapp2.0/recru_it.pdb
+/Users/howie/git/recru_it/obj/Debug/netcoreapp2.0/recru_it.csproj.CoreCompileInputs.cache
+/Users/howie/git/recru_it/obj/Debug/netcoreapp2.0/UserSecretsAssemblyInfo.cs
+/Users/howie/git/recru_it/obj/Debug/netcoreapp2.0/recru_it.AssemblyInfoInputs.cache
+/Users/howie/git/recru_it/obj/Debug/netcoreapp2.0/recru_it.AssemblyInfo.cs
+/Users/howie/git/recru_it/obj/Debug/netcoreapp2.0/recru_it.dll
+/Users/howie/git/recru_it/obj/Debug/netcoreapp2.0/recru_it.pdb

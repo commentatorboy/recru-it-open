@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Recru_it/Recru_it/bin/Debug/netcoreapp2.0/Recru_it.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.0/recru_it.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Recru_it/Recru_it",
+            "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
