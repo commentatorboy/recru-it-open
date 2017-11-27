@@ -41,6 +41,7 @@ namespace recru_it.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> LoginAsync([FromBody]LoginViewModel model)
         {
+            
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
 
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, lockoutOnFailure: false, isPersistent: false);
@@ -62,7 +63,7 @@ namespace recru_it.Controllers
             return CreateJwtPacket(user);
         }
 
-        
+        [Authorize]
         [HttpGet]
         public ActionResult Get()
         {
@@ -72,13 +73,14 @@ namespace recru_it.Controllers
             return Ok(GetSecureUser());
         }
 
-          private ApplicationUser GetSecureUser()
+        [Authorize]
+          public async Task<ApplicationUser>  GetSecureUser()
         {
             var id = HttpContext.User.Claims.First().Value;
             
-            var user = context.Users.SingleOrDefault(u => u.Id == id);
+            var user = _userManager.GetUserAsync(HttpContext.User.Claims.First().Value);
             
-            return user;
+            return await user;
         }
 
         JwtPacket CreateJwtPacket(ApplicationUser user)
@@ -91,7 +93,7 @@ namespace recru_it.Controllers
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id) 
             };
-            var jwt = new JwtSecurityToken(claims: claims, signingCredentials: signingCredentials, expires: DateTime.Now.AddMinutes(1));
+            var jwt = new JwtSecurityToken(claims: claims, signingCredentials: signingCredentials, expires: DateTime.Now.AddMinutes(10));
 
             //gives us the encoded token as a string
             var encodedJwt = new JwtSecurityTokenHandler

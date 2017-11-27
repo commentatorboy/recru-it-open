@@ -58,13 +58,7 @@ namespace recru_it
                 options.User.RequireUniqueEmail = true;
             });
 
-            services.AddCors(options => options.AddPolicy("Cors", builder =>
-            {
-                builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-            }));
+            services.AddCors();
             
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is the secret phrase"));
 
@@ -85,7 +79,8 @@ namespace recru_it
                     ValidateIssuerSigningKey = true
                 };
             });
-            // Add application services.
+
+
             //services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
@@ -107,6 +102,10 @@ namespace recru_it
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            app.UseCors(builder =>
+            builder.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader());
 
             app.UseMvc(routes =>
             {
