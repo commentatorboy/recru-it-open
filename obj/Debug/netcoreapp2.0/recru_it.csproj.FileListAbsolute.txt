@@ -1,4 +1,3 @@
-/Users/howie/git/recru_it/bin/Debug/netcoreapp2.0/app.db
 /Users/howie/git/recru_it/bin/Debug/netcoreapp2.0/recru_it.deps.json
 /Users/howie/git/recru_it/bin/Debug/netcoreapp2.0/recru_it.runtimeconfig.json
 /Users/howie/git/recru_it/bin/Debug/netcoreapp2.0/recru_it.runtimeconfig.dev.json
