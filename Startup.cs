@@ -29,8 +29,8 @@ namespace recru_it
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var hostname = Environment.GetEnvironmentVariable("SQLSERVER_HOST") ?? "localhost";
-            var password = Environment.GetEnvironmentVariable("SQLSERVER_SA_PASSWORD") ?? "kode123@";
+            //var hostname = Environment.GetEnvironmentVariable("SQLSERVER_HOST") ?? "localhost";
+            //var password = Environment.GetEnvironmentVariable("SQLSERVER_SA_PASSWORD") ?? "kode123@";
             //var connString = $"Data Source={hostname};Initial Catalog=Recru_it;User ID=sa;Password={password};";
             var connString = "Data Source=X220-PC\\SQLEXPRESS;Initial Catalog=recruit;Integrated Security=True;Pooling=False";
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connString));

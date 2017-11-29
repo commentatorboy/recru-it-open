@@ -58,8 +58,14 @@ namespace recru_it.Controllers
         {
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
             var result = await _userManager.CreateAsync(user, model.Password);
-
-            return CreateJwtPacket(user);
+            if(result.Succeeded)
+            {
+                return CreateJwtPacket(user);
+            }
+            else
+            {
+                return new JwtPacket() { UserName = result.Errors.First().Description };
+            }
         }
 
         [Authorize]
