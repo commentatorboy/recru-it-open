@@ -13116,28 +13116,33 @@
     ]
   },
   "packageFolders": {
-    "/Users/howie/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\X220\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "/Users/howie/git/recru_it/recru_it.csproj",
+      "projectUniqueName": "C:\\Users\\X220\\Projects\\git_messageboard\\howierecru_it\\recru_it\\recru_it.csproj",
       "projectName": "recru_it",
-      "projectPath": "/Users/howie/git/recru_it/recru_it.csproj",
-      "packagesPath": "/Users/howie/.nuget/packages/",
-      "outputPath": "/Users/howie/git/recru_it/obj/",
+      "projectPath": "C:\\Users\\X220\\Projects\\git_messageboard\\howierecru_it\\recru_it\\recru_it.csproj",
+      "packagesPath": "C:\\Users\\X220\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\X220\\Projects\\git_messageboard\\howierecru_it\\recru_it\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/howie/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\X220\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -13154,15 +13159,6 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
-            "target": "Package",
-            "version": "2.0.0",
-            "autoReferenced": true
-          },
-          "Microsoft.AspNetCore.All": {
-            "target": "Package",
-            "version": "2.0.0"
-          },
           "Microsoft.EntityFrameworkCore.Tools": {
             "suppressParent": "All",
             "target": "Package",
@@ -13170,6 +13166,15 @@
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "suppressParent": "All",
+            "target": "Package",
+            "version": "2.0.0"
+          },
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "2.0.0",
+            "autoReferenced": true
+          },
+          "Microsoft.AspNetCore.All": {
             "target": "Package",
             "version": "2.0.0"
           }

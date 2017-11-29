@@ -10,3 +10,16 @@
 /Users/howie/git/recru_it/obj/Debug/netcoreapp2.0/recru_it.AssemblyInfo.cs
 /Users/howie/git/recru_it/obj/Debug/netcoreapp2.0/recru_it.dll
 /Users/howie/git/recru_it/obj/Debug/netcoreapp2.0/recru_it.pdb
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\obj\Debug\netcoreapp2.0\recru_it.csprojResolveAssemblyReference.cache
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\obj\Debug\netcoreapp2.0\recru_it.csproj.CoreCompileInputs.cache
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\obj\Debug\netcoreapp2.0\recru_it.AssemblyInfoInputs.cache
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\obj\Debug\netcoreapp2.0\recru_it.AssemblyInfo.cs
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\obj\Debug\netcoreapp2.0\recru_it.dll
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\obj\Debug\netcoreapp2.0\recru_it.pdb
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\bin\Debug\netcoreapp2.0\app.db
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\bin\Debug\netcoreapp2.0\recru_it.deps.json
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\bin\Debug\netcoreapp2.0\recru_it.runtimeconfig.json
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\bin\Debug\netcoreapp2.0\recru_it.runtimeconfig.dev.json
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\bin\Debug\netcoreapp2.0\recru_it.dll
+C:\Users\X220\Projects\git_messageboard\howierecru_it\recru_it\bin\Debug\netcoreapp2.0\recru_it.pdb

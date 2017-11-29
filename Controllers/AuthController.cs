@@ -77,10 +77,11 @@ namespace recru_it.Controllers
           public async Task<ApplicationUser>  GetSecureUser()
         {
             var id = HttpContext.User.Claims.First().Value;
-            
-            var user = _userManager.GetUserAsync(HttpContext.User.Claims.First().Value);
-            
-            return await user;
+
+            var userid = _userManager.GetUserId(User);
+            var user = await _userManager.FindByIdAsync(userid);
+
+            return user;
         }
 
         JwtPacket CreateJwtPacket(ApplicationUser user)

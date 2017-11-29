@@ -31,8 +31,8 @@ namespace recru_it
         {
             var hostname = Environment.GetEnvironmentVariable("SQLSERVER_HOST") ?? "localhost";
             var password = Environment.GetEnvironmentVariable("SQLSERVER_SA_PASSWORD") ?? "kode123@";
-            var connString = $"Data Source={hostname};Initial Catalog=Recru_it;User ID=sa;Password={password};";
-
+            //var connString = $"Data Source={hostname};Initial Catalog=Recru_it;User ID=sa;Password={password};";
+            var connString = "Data Source=X220-PC\\SQLEXPRESS;Initial Catalog=recruit;Integrated Security=True;Pooling=False";
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connString));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
