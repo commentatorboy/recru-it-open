@@ -14,12 +14,12 @@ using recru_it.Models.AccountViewModels;
 
 namespace recru_it.Controllers
 {
-        public class JwtPacket
+    public class JwtPacket
     {
         public string Token { get; set; }
         public string UserName { get; set; }
     }
-    
+
     [Produces("application/json")]
     [Route("api/[controller]")]
     public class AuthController : Controller
@@ -34,17 +34,17 @@ namespace recru_it.Controllers
             SignInManager<ApplicationUser> signInManager)
         {
             this.context = context;
-             _userManager = userManager;
+            _userManager = userManager;
             _signInManager = signInManager;
         }
 
         [HttpPost("login")]
         public async Task<ActionResult> LoginAsync([FromBody]LoginViewModel model)
         {
-            
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
 
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, lockoutOnFailure: false, isPersistent: false);
+            var user = context.Users.SingleOrDefault(u => u.Email == model.Email);
+
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, lockoutOnFailure: false, isPersistent: false);
 
             if (user == null)
             {
@@ -54,11 +54,10 @@ namespace recru_it.Controllers
         }
 
         [HttpPost("register")]
-        public JwtPacket Register([FromBody]ApplicationUser user)
+        public async Task<JwtPacket> RegisterAsync([FromBody]RegisterViewModel model)
         {
-
-            context.Users.Add(user);
-            context.SaveChanges();
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var result = await _userManager.CreateAsync(user, model.Password);
 
             return CreateJwtPacket(user);
         }
@@ -74,12 +73,13 @@ namespace recru_it.Controllers
         }
 
         [Authorize]
-          public async Task<ApplicationUser>  GetSecureUser()
+        private ApplicationUser GetSecureUser()
         {
             var id = HttpContext.User.Claims.First().Value;
 
-            var userid = _userManager.GetUserId(User);
-            var user = await _userManager.FindByIdAsync(userid);
+            //var userid = _userManager.GetUserId(User);
+            //var user = await _userManager.FindByIdAsync(userid);
+            var user = context.Users.SingleOrDefault(u => u.Id == id);
 
             return user;
         }
@@ -92,7 +92,7 @@ namespace recru_it.Controllers
 
             var claims = new Claim[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id) 
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id)
             };
             var jwt = new JwtSecurityToken(claims: claims, signingCredentials: signingCredentials, expires: DateTime.Now.AddMinutes(10));
 
