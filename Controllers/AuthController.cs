@@ -9,16 +9,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using recru_it.Data;
+using recru_it.Extensions;
 using recru_it.Models;
 using recru_it.Models.AccountViewModels;
 
 namespace recru_it.Controllers
 {
-    public class JwtPacket
-    {
-        public string Token { get; set; }
-        public string UserName { get; set; }
-    }
 
     [Produces("application/json")]
     [Route("api/[controller]")]
@@ -50,7 +46,7 @@ namespace recru_it.Controllers
             {
                 return NotFound("email or password incorrect");
             }
-            return Ok(CreateJwtPacket(user));
+            return Ok(JwtPacket.CreateJwtPacket(user));
         }
 
         [HttpPost("register")]
@@ -60,7 +56,7 @@ namespace recru_it.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if(result.Succeeded)
             {
-                return CreateJwtPacket(user);
+                return JwtPacket.CreateJwtPacket(user);
             }
             else
             {
@@ -80,25 +76,6 @@ namespace recru_it.Controllers
 
         [Authorize]
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
-
-        JwtPacket CreateJwtPacket(ApplicationUser user)
-        {
-
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is the secret phrase"));
-            var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new Claim[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id)
-            };
-            var jwt = new JwtSecurityToken(claims: claims, signingCredentials: signingCredentials, expires: DateTime.Now.AddMinutes(10));
-
-            //gives us the encoded token as a string
-            var encodedJwt = new JwtSecurityTokenHandler
-                ().WriteToken(jwt);
-            return new JwtPacket() { Token = encodedJwt, UserName = user.Email };
-
-        }
 
     }
 }
