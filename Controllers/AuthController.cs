@@ -75,20 +75,11 @@ namespace recru_it.Controllers
             //middleware uses something with (watch chapter 47) and look into nameidentifier, this
             //also this only works because the first one is the tokenidentifer. This should be changed accordingly
 
-            return Ok(GetSecureUser());
+            return Ok(GetCurrentUserAsync());
         }
 
         [Authorize]
-        private ApplicationUser GetSecureUser()
-        {
-            var id = HttpContext.User.Claims.First().Value;
-
-            //var userid = _userManager.GetUserId(User);
-            //var user = await _userManager.FindByIdAsync(userid);
-            var user = context.Users.SingleOrDefault(u => u.Id == id);
-
-            return user;
-        }
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         JwtPacket CreateJwtPacket(ApplicationUser user)
         {
