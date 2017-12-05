@@ -14,6 +14,7 @@ using recru_it.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using recru_it.Extensions;
 
 namespace recru_it
 {
@@ -118,6 +119,9 @@ namespace recru_it
                     template: "{controller=Home}/{action=Index}/{id?}");
 
             });
+
+            DbSeeder.Initialize(app.ApplicationServices);
+
         }
     }
 }
