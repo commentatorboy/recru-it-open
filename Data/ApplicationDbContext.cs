@@ -10,6 +10,12 @@ namespace recru_it.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<JobApplication> JobApplications { get; set; }
+        public DbSet<JobPost> JobPosts { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

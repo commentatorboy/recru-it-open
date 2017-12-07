@@ -182,6 +182,35 @@ namespace recru_it.Extensions
         public static void DeleteAll(ApplicationDbContext dbContext)
         {
             var result = dbContext.Database.ExecuteSqlCommand("DELETE FROM [AspNetUserTokens]");
+            /*
+             * 
+             * DELETE ALL 
+             * 
+             * 
+             * DELETE FROM [dbo].[AspNetUserTokens]
+                GO
+                DELETE FROM [dbo].[Companies]
+                GO
+                DELETE FROM [dbo].[AspNetUserClaims]
+                GO
+                DELETE FROM [dbo].[AspNetUserLogins]
+                GO
+                DELETE FROM [dbo].[AspNetRoleClaims]
+                GO
+                DELETE FROM [dbo].[AspNetUserRoles]
+                GO
+                DELETE FROM [dbo].[AspNetUsers]
+                GO
+                DELETE FROM [dbo].[JobPosts]
+                GO
+                DELETE FROM [dbo].[JobApplications]
+                GO
+                DELETE FROM [dbo].[Tags]
+                GO
+                DELETE FROM [dbo].[Profiles]
+                GO
+                DELETE FROM [dbo].[AspNetRoles]
+                */
 
         }
 

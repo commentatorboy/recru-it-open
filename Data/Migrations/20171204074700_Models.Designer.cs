@@ -11,9 +11,10 @@ using System;
 namespace recru_it.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171204074700_Models")]
+    partial class Models
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,10 +144,6 @@ namespace recru_it.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("JobApplicationId");
-
-                    b.Property<string>("JobPostId");
-
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -163,8 +160,6 @@ namespace recru_it.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<string>("ProfileId");
-
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -174,14 +169,6 @@ namespace recru_it.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("JobApplicationId")
-                        .IsUnique()
-                        .HasFilter("[JobApplicationId] IS NOT NULL");
-
-                    b.HasIndex("JobPostId")
-                        .IsUnique()
-                        .HasFilter("[JobPostId] IS NOT NULL");
-
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -189,10 +176,6 @@ namespace recru_it.Data.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("ProfileId")
-                        .IsUnique()
-                        .HasFilter("[ProfileId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -212,9 +195,7 @@ namespace recru_it.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Companies");
                 });
@@ -236,9 +217,13 @@ namespace recru_it.Data.Migrations
 
                     b.Property<DateTime>("UpdatedAt");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("TagsId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("JobApplications");
                 });
@@ -260,9 +245,13 @@ namespace recru_it.Data.Migrations
 
                     b.Property<string>("UpdatedAt");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("TagsId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("JobPosts");
                 });
@@ -280,7 +269,11 @@ namespace recru_it.Data.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Profiles");
                 });
@@ -344,26 +337,11 @@ namespace recru_it.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("recru_it.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("recru_it.Models.JobApplication", "JobApplication")
-                        .WithOne("User")
-                        .HasForeignKey("recru_it.Models.ApplicationUser", "JobApplicationId");
-
-                    b.HasOne("recru_it.Models.JobPost", "JobPost")
-                        .WithOne("User")
-                        .HasForeignKey("recru_it.Models.ApplicationUser", "JobPostId");
-
-                    b.HasOne("recru_it.Models.Profile", "Profile")
-                        .WithOne("User")
-                        .HasForeignKey("recru_it.Models.ApplicationUser", "ProfileId");
-                });
-
             modelBuilder.Entity("recru_it.Models.Company", b =>
                 {
                     b.HasOne("recru_it.Models.ApplicationUser", "User")
-                        .WithOne("Company")
-                        .HasForeignKey("recru_it.Models.Company", "UserId");
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("recru_it.Models.JobApplication", b =>
@@ -371,6 +349,10 @@ namespace recru_it.Data.Migrations
                     b.HasOne("recru_it.Models.Tag", "Tags")
                         .WithMany()
                         .HasForeignKey("TagsId");
+
+                    b.HasOne("recru_it.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("recru_it.Models.JobPost", b =>
@@ -378,6 +360,17 @@ namespace recru_it.Data.Migrations
                     b.HasOne("recru_it.Models.Tag", "Tags")
                         .WithMany()
                         .HasForeignKey("TagsId");
+
+                    b.HasOne("recru_it.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("recru_it.Models.Profile", b =>
+                {
+                    b.HasOne("recru_it.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

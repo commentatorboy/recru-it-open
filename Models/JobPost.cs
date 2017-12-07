@@ -18,6 +18,6 @@ namespace recru_it.Models
         public DateTime CreatedBy { get; set; }
 
         public ApplicationUser User { get; set; }
-        public Tag Tags { get; set; }
+        public Tag Tag { get; set; }
     }
 }
