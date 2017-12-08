@@ -296,3 +296,6 @@ obj/Debug/netcoreapp2.0/recru_it.csproj.FileListAbsolute.txt
 obj/Debug/netcoreapp2.0/recru_it.dll
 obj/Debug/netcoreapp2.0/recru_it.pdb
 obj/
+*.cache
+*.cache
+obj/Debug/netcoreapp2.0/recru_it.csproj.CoreCompileInputs.cache

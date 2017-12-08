@@ -22,12 +22,12 @@ namespace recru_it.Extensions
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
                 IdentityResult result = new IdentityResult();
-                bool hasUsers = context.Users.Count() > 0;
+                /*bool hasUsers = context.Users.Count() > 0;
                 if (hasUsers)
                 {
                     DeleteAll(context);   // DB has been seeded and should be deleted
                     return result;
-                }
+                }*/
 
                 var _roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var _userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
@@ -86,15 +86,17 @@ namespace recru_it.Extensions
 
         public static void CreateAllJobApplications(ApplicationDbContext dbContext)
         {
+            Random rnd = new Random();
+            int j = 1;
             for (var i = 0; i <= 10; i++)
             {
+                j = rnd.Next(dbContext.Tags.Count())+1;
                 dbContext.JobApplications.Add(new JobApplication
                 {
                     CreatedAt = DateTime.Now.AddMinutes(i),
                     CreatedBy = "" + i,
                     Description = "" + i,
-                    Id = "" + i,
-                    Tags = dbContext.Tags.FirstOrDefault(),
+                    Tags = dbContext.Tags.Take(j).ToList(),
                     Title = "" + i,
                     UpdatedAt = DateTime.Now.AddMinutes(i),
                     User = dbContext.Users.FirstOrDefault()
@@ -108,15 +110,17 @@ namespace recru_it.Extensions
         /* Remember to create user and tags before doing this*/
         public static void CreateAllJobPosts(ApplicationDbContext dbContext)
         {
+            Random rnd = new Random();
+            int j = 1;
             for (var i = 0; i <= 10; i++)
             {
+                j = rnd.Next(dbContext.Tags.Count())+1;
                 dbContext.JobPosts.Add(new JobPost
                 {
                     CreatedAt = DateTime.Now.AddMinutes(i),
                     CreatedBy = DateTime.Now.AddMinutes(i),
                     Description = "" + i,
-                    Id = "" + i,
-                    Tags = dbContext.Tags.FirstOrDefault(),
+                    Tags = dbContext.Tags.Take(j).ToList(),
                     Title = "" + i,
                     UpdatedAt = DateTime.Now.AddMinutes(i),
                     User = dbContext.Users.FirstOrDefault()

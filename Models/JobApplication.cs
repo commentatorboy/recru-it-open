@@ -18,6 +18,6 @@ namespace recru_it.Models
         public string CreatedBy { get; set; }
 
         public ApplicationUser User { get; set; }
-        public Tag Tags { get; set; }   
+        public List<Tag> Tags { get; set; }   
     }
 }
