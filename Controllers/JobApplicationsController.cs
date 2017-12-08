@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using recru_it.Data;
 using recru_it.Models;
+using recru_it.Extensions;
 
 namespace recru_it.Controllers
 {
@@ -97,6 +98,27 @@ namespace recru_it.Controllers
             return CreatedAtAction("GetJobApplication", new { id = jobApplication.Id }, jobApplication);
         }
 
+
+        [HttpPost]
+        [Route("GetAllJobApplicationByTags")]
+        public ActionResult GetAllJobApplicationByTags([FromBody] List<Tag> tags)
+        {
+            tags = _context.Tags.ToList();
+            CompareTags compareTags = new CompareTags(_context);
+
+            List<JobApplication> jp = compareTags.GetJobApplicationsListByTags(tags);
+            List<JobApplication> distictJp = jp.Distinct().ToList();
+            if (jp.Count() > 0)
+            {
+                return Ok(distictJp);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
+
         // DELETE: api/JobApplications/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJobApplication([FromRoute] string id)
@@ -117,6 +139,8 @@ namespace recru_it.Controllers
 
             return Ok(jobApplication);
         }
+
+
 
         private bool JobApplicationExists(string id)
         {

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using recru_it.Data;
 using recru_it.Models;
+using recru_it.Extensions;
 
 namespace recru_it.Controllers
 {
@@ -46,6 +47,31 @@ namespace recru_it.Controllers
 
             return Ok(jobPost);
         }
+
+
+        //api/JobPosts/tagId=?? WIP
+        /*[HttpPost]
+        public void GetAllJobPostsByTagIds([FromBody] string[] tagIds)
+        {
+            //get tags from ids
+
+            List<Tag> searchTags = new List<Tag>();
+            foreach(var id in tagIds)
+            {
+                Tag tag = _context.Tags.Where(t => t.Id == id).First();
+                searchTags.Add(tag);
+            }
+            GetAllJobPostsByTags(searchTags);
+
+        }
+        */
+        /*[HttpGet("{jobPostId}")]
+        public void GetJobPostsByJobPostTags([FromRoute] string jobPostId)
+        {
+            JobPost searchJobPost = _context.JobPosts.Where(jp => jp.Id == jobPostId).First();
+            GetAllJobPostsByTags(searchJobPost.Tags.ToList());
+        }*/
+
 
         // PUT: api/JobPosts/5
         [HttpPut("{id}")]
@@ -97,6 +123,27 @@ namespace recru_it.Controllers
             return CreatedAtAction("GetJobPost", new { id = jobPost.Id }, jobPost);
         }
 
+
+        [HttpPost]
+        [Route("GetAllJobPostsByTags")]
+        public ActionResult GetAllJobPostsByTags([FromBody] List<Tag> tags)
+        {
+            tags = _context.Tags.ToList();
+            CompareTags compareTags = new CompareTags(_context);
+
+            List<JobPost> jp = compareTags.GetJobPostsByTags(tags);
+            List<JobPost> distictJp = jp.Distinct().ToList();
+            if (jp.Count() > 0)
+            {
+                return Ok(distictJp);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
+
         // DELETE: api/JobPosts/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJobPost([FromRoute] string id)
@@ -117,6 +164,11 @@ namespace recru_it.Controllers
 
             return Ok(jobPost);
         }
+
+
+        
+
+
 
         private bool JobPostExists(string id)
         {
