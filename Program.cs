@@ -20,6 +20,8 @@ namespace recru_it
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseDefaultServiceProvider(options =>
+                    options.ValidateScopes = false)
                 .UseUrls("http://localhost:5001/")
                 .Build();
     }

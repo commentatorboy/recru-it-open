@@ -299,5 +299,7 @@ namespace recru_it.Data.Migrations
                 table: "AspNetRoles",
                 column: "NormalizedName");
         }
+
+        
     }
 }

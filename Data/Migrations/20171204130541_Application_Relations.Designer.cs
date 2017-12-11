@@ -11,9 +11,10 @@ using System;
 namespace recru_it.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171204130541_Application_Relations")]
+    partial class Application_Relations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,11 +231,15 @@ namespace recru_it.Data.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("TagsId");
+
                     b.Property<string>("Title");
 
                     b.Property<DateTime>("UpdatedAt");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TagsId");
 
                     b.ToTable("JobApplications");
                 });
@@ -244,17 +249,21 @@ namespace recru_it.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("CreatedAt");
+                    b.Property<string>("CreatedAt");
 
-                    b.Property<DateTime>("CreatedBy");
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("TagsId");
+
                     b.Property<string>("Title");
 
-                    b.Property<DateTime>("UpdatedAt");
+                    b.Property<string>("UpdatedAt");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TagsId");
 
                     b.ToTable("JobPosts");
                 });
@@ -264,7 +273,7 @@ namespace recru_it.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Age");
+                    b.Property<string>("Age");
 
                     b.Property<string>("FirstName");
 
@@ -284,17 +293,9 @@ namespace recru_it.Data.Migrations
 
                     b.Property<string>("Descriptipon");
 
-                    b.Property<string>("JobApplicationId");
-
-                    b.Property<string>("JobPostId");
-
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("JobApplicationId");
-
-                    b.HasIndex("JobPostId");
 
                     b.ToTable("Tags");
                 });
@@ -366,15 +367,18 @@ namespace recru_it.Data.Migrations
                         .HasForeignKey("recru_it.Models.Company", "UserId");
                 });
 
-            modelBuilder.Entity("recru_it.Models.Tag", b =>
+            modelBuilder.Entity("recru_it.Models.JobApplication", b =>
                 {
-                    b.HasOne("recru_it.Models.JobApplication")
-                        .WithMany("Tags")
-                        .HasForeignKey("JobApplicationId");
+                    b.HasOne("recru_it.Models.Tag", "Tags")
+                        .WithMany()
+                        .HasForeignKey("TagsId");
+                });
 
-                    b.HasOne("recru_it.Models.JobPost")
-                        .WithMany("Tags")
-                        .HasForeignKey("JobPostId");
+            modelBuilder.Entity("recru_it.Models.JobPost", b =>
+                {
+                    b.HasOne("recru_it.Models.Tag", "Tags")
+                        .WithMany()
+                        .HasForeignKey("TagsId");
                 });
 #pragma warning restore 612, 618
         }
