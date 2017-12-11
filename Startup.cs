@@ -30,18 +30,16 @@ namespace recru_it
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // var hostname = Environment.GetEnvironmentVariable("SQLSERVER_HOST") ?? "localhost";
-            // var password = Environment.GetEnvironmentVariable("SQLSERVER_SA_PASSWORD") ?? "kode123@";
-            // var connString = $"Data Source={hostname};Initial Catalog=Recru_it;User ID=sa;Password={password};";
-            // var connString = "Data Source=X220-PC\\SQLEXPRESS;Initial Catalog=recruit;Integrated Security=True;Pooling=False";
-
-            string connectionString = Configuration.GetConnectionString("MySQL");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionString));
+            //var hostname = Environment.GetEnvironmentVariable("SQLSERVER_HOST") ?? "localhost";
+            //var password = Environment.GetEnvironmentVariable("SQLSERVER_SA_PASSWORD") ?? "kode123@";
+            //var connString = $"Data Source={hostname};Initial Catalog=Recru_it;User ID=sa;Password={password};";
+            var connString = "Data Source=X220-PC\\SQLEXPRESS;Initial Catalog=recruit;Integrated Security=True;Pooling=False";
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connString));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings
@@ -62,26 +60,26 @@ namespace recru_it
             });
 
             services.AddCors();
-
+            
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is the secret phrase"));
 
-            services.AddAuthentication(options =>
-           {
-               options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-               options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-           }).AddJwtBearer(cfg =>
-           {
-               cfg.RequireHttpsMetadata = false;
-               cfg.SaveToken = true;
-               cfg.TokenValidationParameters = new TokenValidationParameters()
-               {
-                   IssuerSigningKey = signingKey,
-                   ValidateAudience = false,
-                   ValidateIssuer = false,
-                   ValidateLifetime = false,
-                   ValidateIssuerSigningKey = true
-               };
-           });
+             services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(cfg =>
+            {
+                cfg.RequireHttpsMetadata = false;
+                cfg.SaveToken = true;
+                cfg.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    IssuerSigningKey = signingKey,
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ValidateLifetime = false,
+                    ValidateIssuerSigningKey = true
+                };
+            });
 
 
             //services.AddTransient<IEmailSender, EmailSender>();
@@ -113,11 +111,11 @@ namespace recru_it
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "api",
+                    name: "api", 
                     template: "api/{controller=Auth}");
 
                 routes.MapRoute(
-                    name: "default",
+                    name: "default", 
                     template: "{controller=Home}/{action=Index}/{id?}");
 
             });
