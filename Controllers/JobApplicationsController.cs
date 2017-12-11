@@ -98,12 +98,15 @@ namespace recru_it.Controllers
             return CreatedAtAction("GetJobApplication", new { id = jobApplication.Id }, jobApplication);
         }
 
-
+       
         [HttpPost]
-        [Route("GetAllJobApplicationByTags")]
-        public ActionResult GetAllJobApplicationByTags([FromBody] List<Tag> tags)
+        [Route("GetAllJobApplicationsByTags")]
+        public ActionResult GetAllJobApplicationsByTags([FromBody] List<Tag> tags)
         {
+            //This is only used for used as an example. 
             tags = _context.Tags.ToList();
+
+
             CompareTags compareTags = new CompareTags(_context);
 
             List<JobApplication> jp = compareTags.GetJobApplicationsListByTags(tags);
@@ -116,6 +119,18 @@ namespace recru_it.Controllers
             {
                 return NoContent();
             }
+        }
+
+
+
+        [HttpPost]
+        [Route("GetAllJobApplicationsByJobPost")]
+        public void GetAllJobApplicationsByJobPost([FromBody] JobPost jobPost)
+        {
+            //Get the jobapplications that has the same tags the jobpost tags 
+
+            GetAllJobApplicationsByTags(jobPost.Tags);
+
         }
 
 
