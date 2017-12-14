@@ -21,7 +21,12 @@ namespace recru_it.Extensions
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
+
                 IdentityResult result = new IdentityResult();
+                if (context.Users.Count() == 0)
+                {
+                    return result;
+                }
                 /*bool hasUsers = context.Users.Count() > 0;
                 if (hasUsers)
                 {
@@ -32,10 +37,7 @@ namespace recru_it.Extensions
                 var _roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var _userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-                if(context.Users.Count() == 0)
-                {
-                    return result;
-                }
+
                 await CreateAllRoles(_roleManager);
 
                 //Notice: Since this is async it can cause problems to the other functions, since they require the user, and those might not have been made yet.
