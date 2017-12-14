@@ -143,6 +143,13 @@ namespace recru_it.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("GetAllJobPostsByJobApplication")]
+        public void GetAllJobPostsByJobApplication([FromBody] JobApplication jobApplication)
+        {
+            GetAllJobPostsByTags(jobApplication.Tags);
+        }
+
 
         // DELETE: api/JobPosts/5
         [HttpDelete("{id}")]
