@@ -128,6 +128,10 @@ namespace recru_it.Controllers
         [Route("GetAllJobPostsByTags")]
         public ActionResult GetAllJobPostsByTags([FromBody] List<Tag> tags)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             tags = _context.Tags.ToList();
             CompareTags compareTags = new CompareTags(_context);
 
@@ -145,9 +149,14 @@ namespace recru_it.Controllers
 
         [HttpPost]
         [Route("GetAllJobPostsByJobApplication")]
-        public void GetAllJobPostsByJobApplication([FromBody] JobApplication jobApplication)
+        public ActionResult GetAllJobPostsByJobApplication([FromBody] JobApplication jobApplication)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             GetAllJobPostsByTags(jobApplication.Tags);
+            return Ok();
         }
 
 

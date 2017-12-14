@@ -103,6 +103,10 @@ namespace recru_it.Controllers
         [Route("GetAllJobApplicationsByTags")]
         public ActionResult GetAllJobApplicationsByTags([FromBody] List<Tag> tags)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             //This is only used for used as an example. 
             tags = _context.Tags.ToList();
 
@@ -125,11 +129,16 @@ namespace recru_it.Controllers
 
         [HttpPost]
         [Route("GetAllJobApplicationsByJobPost")]
-        public void GetAllJobApplicationsByJobPost([FromBody] JobPost jobPost)
+        public ActionResult GetAllJobApplicationsByJobPost([FromBody] JobPost jobPost)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             //Get the jobapplications that has the same tags the jobpost tags 
 
             GetAllJobApplicationsByTags(jobPost.Tags);
+            return Ok();
 
         }
 
