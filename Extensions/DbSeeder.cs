@@ -23,16 +23,21 @@ namespace recru_it.Extensions
             {
 
                 IdentityResult result = new IdentityResult();
-                if (context.Users.Count() == 0)
-                {
-                    return result;
-                }
+
                 /*bool hasUsers = context.Users.Count() > 0;
                 if (hasUsers)
                 {
                     DeleteAll(context);   // DB has been seeded and should be deleted
                     return result;
                 }*/
+
+                bool hasUsers = HasData(context);
+                if (hasUsers)
+                {
+                    return result;
+                }
+
+
 
                 var _roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var _userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
@@ -52,6 +57,16 @@ namespace recru_it.Extensions
 
                 return result;
             }
+        }
+
+
+        public static bool HasData(ApplicationDbContext dbContext)
+        {
+            if(dbContext.Users.Count() > 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public static async Task<IdentityResult> CreateAllUsers(UserManager<ApplicationUser> userManager)
@@ -187,6 +202,8 @@ namespace recru_it.Extensions
             dbContext.SaveChanges();
 
         }
+
+        
 
         public static void DeleteAll(ApplicationDbContext dbContext)
         {
