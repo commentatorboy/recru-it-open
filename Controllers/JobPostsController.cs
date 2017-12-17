@@ -29,6 +29,18 @@ namespace recru_it.Controllers
             return _context.JobPosts;
         }
 
+        [HttpGet]
+        [Route("GetAllJobPosts")]
+        public async Task<IActionResult> GetAllJobPosts()
+        {
+            var jobPostWithUser = await _context.JobPosts.Include(jp => jp.User).Include(jp => jp.User.JobApplication).ToListAsync();
+            if (jobPostWithUser == null)
+            {
+                return NotFound();
+            }
+            return Ok(jobPostWithUser);
+        }
+
         // GET: api/JobPosts/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetJobPost([FromRoute] string id)
