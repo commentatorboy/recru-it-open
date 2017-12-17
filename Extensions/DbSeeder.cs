@@ -114,12 +114,12 @@ namespace recru_it.Extensions
                 dbContext.JobApplications.Add(new JobApplication
                 {
                     CreatedAt = DateTime.Now.AddMinutes(i),
-                    CreatedBy = "" + i,
-                    Description = "" + i,
+                    CreatedBy = dbContext.Users.ToArray()[i].Profile.FirstName + i,
+                    Description = "aoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsic" + i,
                     Tags = dbContext.Tags.Take(j).ToList(),
-                    Title = "" + i,
+                    Title = "aoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsic" + i,
                     UpdatedAt = DateTime.Now.AddMinutes(i),
-                    User = dbContext.Users.FirstOrDefault()
+                    User = dbContext.Users.ToArray()[i]
 
                 });
 
@@ -138,12 +138,12 @@ namespace recru_it.Extensions
                 dbContext.JobPosts.Add(new JobPost
                 {
                     CreatedAt = DateTime.Now.AddMinutes(i),
-                    CreatedBy = DateTime.Now.AddMinutes(i),
-                    Description = "" + i,
+                    CreatedBy = dbContext.Users.ToArray()[i].Profile.FirstName + i,
+                    Description = "aoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsic" + i,
                     Tags = dbContext.Tags.Take(j).ToList(),
-                    Title = "" + i,
+                    Title = "aoijdscaoidsjcaoisjcasoidjcaodsic" + i,
                     UpdatedAt = DateTime.Now.AddMinutes(i),
-                    User = dbContext.Users.FirstOrDefault()
+                    User = dbContext.Users.ToArray()[i]
 
                 });
             }

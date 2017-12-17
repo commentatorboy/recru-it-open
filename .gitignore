@@ -300,3 +300,6 @@ obj/
 *.cache
 obj/Debug/netcoreapp2.0/recru_it.csproj.CoreCompileInputs.cache
 obj/Debug/netcoreapp2.0/recru_it.csproj.CoreCompileInputs.cache
+*.cache
+obj/Debug/netcoreapp2.0/recru_it.csproj.CoreCompileInputs.cache
+Data/Migrations/20171217094510_CreatedByIsString.Designer.cs

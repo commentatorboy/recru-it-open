@@ -246,7 +246,7 @@ namespace recru_it.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<DateTime>("CreatedBy");
+                    b.Property<string>("CreatedBy");
 
                     b.Property<string>("Description");
 
