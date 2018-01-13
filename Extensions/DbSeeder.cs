@@ -140,7 +140,7 @@ namespace recru_it.Extensions
                     CreatedAt = DateTime.Now.AddMinutes(i),
                     CreatedBy = dbContext.Users.ToArray()[i].Profile.FirstName + i,
                     Description = "aoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsic" + i,
-                    Tags = dbContext.Tags.Take(j).ToList(),
+                    Tags = dbContext.Tags.ToList(),
                     Title = "aoijdscaoidsjcaoisjcasoidjcaodsic" + i,
                     UpdatedAt = DateTime.Now.AddMinutes(i),
                     User = dbContext.Users.ToArray()[i]

@@ -33,7 +33,7 @@ namespace recru_it.Controllers
         [Route("GetAllJobPosts")]
         public async Task<IActionResult> GetAllJobPosts()
         {
-            var jobPostWithUser = await _context.JobPosts.Include(jp => jp.User).Include(jp => jp.User.JobApplication).ToListAsync();
+            var jobPostWithUser = await _context.JobPosts.Include(jp => jp.Tags).ToArrayAsync();
             if (jobPostWithUser == null)
             {
                 return NotFound();
