@@ -140,7 +140,7 @@ namespace recru_it.Extensions
                     CreatedAt = DateTime.Now.AddMinutes(i),
                     CreatedBy = dbContext.Users.ToArray()[i].Profile.FirstName + i,
                     Description = "aoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsic" + i,
-                    Tags = dbContext.Tags.ToList(),
+                    Tags = new List<Tag> { dbContext.Tags.ToArray()[j] },
                     Title = "aoijdscaoidsjcaoisjcasoidjcaodsic" + i,
                     UpdatedAt = DateTime.Now.AddMinutes(i),
                     User = dbContext.Users.ToArray()[i]
@@ -190,12 +190,16 @@ namespace recru_it.Extensions
 
         public static void CreateAllTags(ApplicationDbContext dbContext)
         {
+            Random rnd = new Random();
+
+            string[] tags = new string[4] { "C#", "webdevelopment", "PHP", "Angular" };
             for (var i = 0; i <= 10; i++)
             {
+                int j = rnd.Next(0, tags.Count());
                 dbContext.Tags.Add(new Tag
                 {
-                    Descriptipon = "desc " + i,
-                    Title = "title " + i
+                    Descriptipon = tags[j]  +  " desc " + i,
+                    Title = tags[j] + " " + i
 
                 });
             }
