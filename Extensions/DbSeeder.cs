@@ -114,10 +114,10 @@ namespace recru_it.Extensions
                 dbContext.JobApplications.Add(new JobApplication
                 {
                     CreatedAt = DateTime.Now.AddMinutes(i),
-                    CreatedBy = dbContext.Users.ToArray()[i].Profile.FirstName + i,
-                    Description = "aoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsic" + i,
+                    CreatedBy = dbContext.Users.ToArray()[i].Profile.FirstName,
+                    Description = "aoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsic",
                     Tags = dbContext.Tags.Take(j).ToList(),
-                    Title = "aoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsic" + i,
+                    Title = "aoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsic",
                     UpdatedAt = DateTime.Now.AddMinutes(i),
                     User = dbContext.Users.ToArray()[i]
 
@@ -132,16 +132,21 @@ namespace recru_it.Extensions
         {
             Random rnd = new Random();
             int j = 1;
+            int k = 0;
+            string[] names = new string[] { "C# udvikler", "PHP udvikler", "Scrum master", "Magento udvikler", "IT supporter", "IT indkøber", "Angular udvikler", "JAVA udvikler", "Webdesigner", "Webudvikler" };
+            string[] desc = new string[] { "WEXO", "IBM", "Microsoft", "Netcompany", "UCN", "IT DATA", "Companyoung", "UCN", "Odense hospital", "Rejsekort A/S" };
+
             for (var i = 0; i <= 10; i++)
             {
                 j = rnd.Next(dbContext.Tags.Count())+1;
+                k = rnd.Next(0, desc.Count());
                 dbContext.JobPosts.Add(new JobPost
                 {
                     CreatedAt = DateTime.Now.AddMinutes(i),
-                    CreatedBy = dbContext.Users.ToArray()[i].Profile.FirstName + i,
-                    Description = "aoijdscaoidsjcaoisjcasoidjcaodsicaoijdscaoidsjcaoisjcasoidjcaodsic" + i,
+                    CreatedBy = dbContext.Users.ToArray()[i].Profile.FirstName,
+                    Description = names[k],
                     Tags = new List<Tag> { dbContext.Tags.ToArray()[j] },
-                    Title = "aoijdscaoidsjcaoisjcasoidjcaodsic" + i,
+                    Title = desc[k],
                     UpdatedAt = DateTime.Now.AddMinutes(i),
                     User = dbContext.Users.ToArray()[i]
 
@@ -153,14 +158,17 @@ namespace recru_it.Extensions
 
         public static void CreateAllProfiles(ApplicationDbContext dbContext)
         {
+            Random rnd = new Random();
+            string[] names = new string[] { "WEXO", "IBM", "Microsoft", "Netcompany", "UCN", "IT DATA", "Companyoung", "UCN", "Odense hospital", "Rejsekort A/S" };
             for (var i = 0; i <= 10; i++)
             {
+                int j = rnd.Next(0, names.Count());
                 dbContext.Profiles.Add(new Profile
                 {
                     Age = i,
-                    FirstName = "name " + i,
+                    FirstName = names[j],
                     Gender = "Male ",
-                    LastName = "lastname " + i,
+                    LastName = "lastname ",
                     User = dbContext.Users.ToArray()[i]
                     
 
@@ -198,8 +206,8 @@ namespace recru_it.Extensions
                 int j = rnd.Next(0, tags.Count());
                 dbContext.Tags.Add(new Tag
                 {
-                    Descriptipon = tags[j]  +  " desc " + i,
-                    Title = tags[j] + " " + i
+                    Descriptipon = tags[j]  +  " desc",
+                    Title = tags[j]
 
                 });
             }
